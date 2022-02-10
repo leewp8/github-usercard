@@ -92,7 +92,6 @@ function githubCard(gitInfo) {
   info.appendChild(following)
   info.appendChild(bio)
 
-  console.log(profileLink)
   
 
   card.classList.add('card')
