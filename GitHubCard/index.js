@@ -1,8 +1,26 @@
+import axios from "axios"
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+
+const followersArray = ['tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell', 'crharding'];
+
+for (let i = 0; i < followersArray.length; i++) {
+  getGitCard(followersArray[i])
+}
+
+function getGitCard(username) {
+  axios.get(`https://api.github.com/users/${username}`)
+  .then(resp => {
+    document.querySelector('.cards').appendChild(githubCard(resp.data));
+  })
+  .catch(err => console.error(err))
+}
+
+  
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -28,7 +46,7 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -49,12 +67,56 @@ const followersArray = [];
       </div>
     </div>
 */
+function githubCard(gitInfo) {
+
+  const card = document.createElement('div')
+  const image = document.createElement('img')
+  const info = document.createElement('div')
+  const name = document.createElement('h3')
+  const login = document.createElement('p')
+  const location = document.createElement('p')
+  const profile = document.createElement('p')
+  const profileLink = document.createElement('a')
+  const followers = document.createElement('p')
+  const following = document.createElement('p')
+  const bio = document.createElement('p')
+
+  card.appendChild(image);
+  card.appendChild(info)
+  info.appendChild(name)
+  info.appendChild(login)
+  info.appendChild(location)
+  info.appendChild(profile)
+  profile.appendChild(profileLink)
+  info.appendChild(followers)
+  info.appendChild(following)
+  info.appendChild(bio)
+
+  console.log(profileLink)
+  
+
+  card.classList.add('card')
+  info.classList.add('card-info')
+  name.classList.add('name')
+  login.classList.add('username')
+
+  image.src = gitInfo.avatar_url
+  image.alt = 'github user'
+  name.textContent = gitInfo.name
+  login.textContent = gitInfo.login
+  location.textContent = `Location: ${gitInfo.location}`
+  profile.textContent = `Profile:`
+  profileLink.textContent = 'Link'
+  profileLink.href = gitInfo.html_url;
+  followers.textContent = `Followers: ${gitInfo.followers}`
+  following.textContent = `Following: ${gitInfo.following}`
+  bio.textContent = `Bio: ${gitInfo.bio}`
+
+  return card
+}
+
 
 /*
   List of LS Instructors Github username's:
-    tetondan
-    dustinmyers
-    justsml
-    luishrd
-    bigknell
+    
 */
