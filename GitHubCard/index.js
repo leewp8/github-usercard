@@ -81,18 +81,9 @@ function githubCard(gitInfo) {
   const following = document.createElement('p')
   const bio = document.createElement('p')
 
-  card.appendChild(image);
-  card.appendChild(info)
-  info.appendChild(name)
-  info.appendChild(login)
-  info.appendChild(location)
-  info.appendChild(profile)
-  profile.appendChild(profileLink)
-  info.appendChild(followers)
-  info.appendChild(following)
-  info.appendChild(bio)
+ 
 
-  
+  console.log(gitInfo.html_url)
 
   card.classList.add('card')
   info.classList.add('card-info')
@@ -104,12 +95,23 @@ function githubCard(gitInfo) {
   name.textContent = gitInfo.name
   login.textContent = gitInfo.login
   location.textContent = `Location: ${gitInfo.location}`
-  profile.textContent = `Profile:`
+  profile.textContent = `Profile: `
   profileLink.textContent = 'Link'
   profileLink.href = gitInfo.html_url;
   followers.textContent = `Followers: ${gitInfo.followers}`
   following.textContent = `Following: ${gitInfo.following}`
   bio.textContent = `Bio: ${gitInfo.bio}`
+
+  card.appendChild(image);
+  card.appendChild(info)
+  info.appendChild(name)
+  info.appendChild(login)
+  info.appendChild(location)
+  info.appendChild(profile)
+  profile.appendChild(profileLink)
+  info.appendChild(followers)
+  info.appendChild(following)
+  info.appendChild(bio)
 
   return card
 }
